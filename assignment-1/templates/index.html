@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            background-image: url('/static/graph-paper.jpg'); /* Replace 'graph-paper.jpg' with the filename of your background image */
+            background-size: cover;
+            background-repeat: repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .calculator {
+            width: 300px;
+            margin: 100px auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="number"] {
+            padding: 5px;
+            width: 100px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        select {
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #007bff;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* CSS for animation of mathematical characters */
+        .math-characters {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            font-size: 20px;
+            color: rgba(0, 0, 0, 0.2);
+            animation: mathAnimation 10s linear infinite alternate;
+        }
+
+        .math-characters::before,
+        .math-characters::after {
+            content: '∫∑∏√≈≡±×÷';
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .math-characters::after {
+            content: '∫∑∏√≈≡±×÷';
+            bottom: 0;
+            right: 0;
+            animation-direction: alternate-reverse;
+        }
+
+        @keyframes mathAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(200px) rotate(360deg);
+            }
+        }
+
+        /* Additional math character animations */
+        .math-characters:nth-child(2) {
+            top: 50px;
+            left: 50px;
+            animation-delay: 1s;
+        }
+
+        .math-characters:nth-child(3) {
+            top: 150px;
+            left: 150px;
+            animation-delay: 2s;
+        }
+
+        /* Add more nth-child rules for additional animations */
+        
+        .math-characters:nth-child(4) {
+            top: 200px;
+            left: 200px;
+            animation-delay: 3s;
+        }
+        */
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Simple Calculator</h1>
+        <form action="/calculate" method="post">
+            <label for="num1">Enter first number:</label>
+            <input type="number" id="num1" name="num1" required><br><br>
+            
+            <label for="num2">Enter second number:</label>
+            <input type="number" id="num2" name="num2" required><br><br>
+            
+            <label for="operation">Select operation:</label>
+            <select id="operation" name="operation">
+                <option value="add">Addition</option>
+                <option value="subtract">Subtraction</option>
+                <option value="multiply">Multiplication</option>
+                <option value="divide">Division</option>
+            </select><br><br>
+            
+            <input type="submit" value="Calculate">
+        </form>
+        
+        {% if result %}
+        <div class="result">
+            <p>Result: {{ result }}</p>
+            <p>Inputs: {{ num1 }}, {{ num2 }}</p>
+        </div>
+        {% endif %}
+        
+        <!-- Display history of calculations -->
+        <h2>History</h2>
+        <ul>
+            {% for calc in history %}
+            <li>{{ calc.num1 }} {{ calc.operation }} {{ calc.num2 }} = {{ calc.result }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Background animation -->
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+    <div class="math-characters"></div>
+</body>
+</html>
